@@ -32,7 +32,7 @@ shawonui = "0.1.0"
 ## Quick Start
 
 ```rust
-use shawonui::{Application, Button, Label, Window};
+use shawon::{Application, Button, Label, Window};
 use std::rc::Rc;
 
 fn main() {
