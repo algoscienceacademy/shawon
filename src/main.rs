@@ -1,4 +1,3 @@
-mod shawon;
 mod styles;
 
 use shawon::{

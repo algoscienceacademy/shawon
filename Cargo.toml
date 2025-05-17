@@ -1,6 +1,6 @@
 [package]
 name = "shawon"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2024"
 authors = ["Shahrear"]
 description = "A lightweight Rust wrapper for Qt, providing a simple and ergonomic way to create cross-platform GUI applications"
@@ -9,6 +9,21 @@ repository = "https://github.com/algoscienceacademy/shawon"
 license = "MIT"
 keywords = ["gui", "qt", "ui", "interface", "cross-platform"]
 categories = ["gui", "api-bindings"]
+
+# Library configuration
+[lib]
+name = "shawon"
+path = "src/lib.rs"
+
+# Binary configuration
+[[bin]]
+name = "shawon-demo"
+path = "src/main.rs"
+
+# Make sure the styles module is included in the library
+[package.metadata.cargo-feature-combinations]
+# This ensures that the styles module is recognized as part of the crate
+member-path = "src"
 
 [dependencies]
 libc = "0.2"
