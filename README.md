@@ -26,7 +26,7 @@ Add ShawonUI to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-shawon = "0.1.3
+shawon = "0.1.5
 ```
 
 ## Quick Start

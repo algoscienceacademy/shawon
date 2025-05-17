@@ -64,6 +64,23 @@ fn main() {
             build.flag("-fexceptions");
             build.flag("-fnon-call-exceptions");
         }
+    } else if cfg!(target_os = "linux") {
+        // Linux-specific flags
+        build.flag("-fPIC");
+        
+        // On Linux, we might need additional include paths for X11
+        build.include("/usr/include/x11");
+        build.include("/usr/include/gtk-3.0");
+    } else if cfg!(target_os = "macos") {
+        // macOS-specific flags
+        build.flag("-fPIC");
+        build.flag("-F/Library/Frameworks");
+        build.flag("-framework");
+        build.flag("Cocoa");
+        
+        // Add macOS framework paths
+        println!("cargo:rustc-link-arg=-framework");
+        println!("cargo:rustc-link-arg=Cocoa");
     }
     
     build.compile("qt_wrapper");
