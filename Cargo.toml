@@ -2,9 +2,31 @@
 name = "shawon"
 version = "0.1.0"
 edition = "2024"
+authors = ["Shahrear"]
+description = "A lightweight Rust wrapper for Qt, providing a simple and ergonomic way to create cross-platform GUI applications"
+readme = "README.md"
+repository = "https://github.com/algoscienceacademy/shawon"
+license = "MIT"
+keywords = ["gui", "qt", "ui", "interface", "cross-platform"]
+categories = ["gui", "api-bindings"]
 
 [dependencies]
 libc = "0.2"
 
 [build-dependencies]
 cc = "1.0"
+
+[features]
+default = []
+dark-theme = []
+light-theme = []
+
+[package.metadata.docs.rs]
+features = ["dark-theme", "light-theme"]
+rustdoc-args = ["--cfg", "docsrs"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
+strip = true
