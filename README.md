@@ -171,6 +171,38 @@ table_widget.set_cell_text(0, 0, "Cell 1,1");
 table_widget.set_cell_text(0, 1, "Cell 1,2");
 ```
 
+## Components
+
+### QAbstractButton
+
+`QAbstractButton` provides the basic functionality for button widgets. It can be used for clickable buttons:
+
+```rust
+use shawon::{Application, QAbstractButton, QWidget};
+
+fn main() {
+    let app = Application::new();
+    let window = QWidget::new();
+    
+    let button = QAbstractButton::new();
+    button.set_text("Click Me");
+    button.set_parent(&window);
+    
+    button.on_clicked(|| {
+        println!("Button was clicked!");
+    });
+    
+    window.show();
+    app.exec();
+}
+```
+
+#### Features:
+- Text labels
+- Click events
+- Checkable states
+- Toggle functionality
+
 ## Dialogs
 
 ```rust

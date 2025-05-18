@@ -1,6 +1,6 @@
 [package]
 name = "shawon"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2024"
 authors = ["Shahrear"]
 description = "A lightweight Rust wrapper for Qt, providing a simple and ergonomic way to create cross-platform GUI applications"
@@ -39,6 +39,14 @@ light-theme = []
 [package.metadata.docs.rs]
 features = ["dark-theme", "light-theme"]
 rustdoc-args = ["--cfg", "docsrs"]
+
+[[example]]
+name = "button_example"
+path = "examples/button_example.rs"
+
+[[example]]
+name = "graphics_item_example"
+path = "examples/graphics_item_example.rs"
 
 [profile.release]
 lto = true

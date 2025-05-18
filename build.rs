@@ -47,11 +47,16 @@ fn main() {
     build
         .cpp(true)
         .file("src/cpp/qt_wrapper.cpp")
+        .file("src/cpp/button.cpp")
+        .file("src/cpp/graphics_item.cpp")
+        .file("src/cpp/graphics_scene.cpp")
+        .file("src/cpp/graphics_view.cpp")
+        .file("src/cpp/widget_utils.cpp") // Add our new file
         .include(&qt_include)
         .include(format!("{}/QtWidgets", qt_include))
         .include(format!("{}/QtCore", qt_include))
         .include(format!("{}/QtGui", qt_include))
-        .flag("-std=c++14");
+        .flag("-std=c++11");
     
     // Add platform-specific flags
     if cfg!(target_os = "windows") {
@@ -83,7 +88,7 @@ fn main() {
         println!("cargo:rustc-link-arg=Cocoa");
     }
     
-    build.compile("qt_wrapper");
+    build.compile("shawon");
     
     // Link against Qt libraries
     println!("cargo:rustc-link-search={}", qt_libs);
@@ -100,5 +105,10 @@ fn main() {
     
     println!("cargo:rerun-if-changed=src/cpp/qt_wrapper.cpp.in");
     println!("cargo:rerun-if-changed=src/cpp/qt_wrapper.cpp");
+    println!("cargo:rerun-if-changed=src/cpp/button.cpp");
+    println!("cargo:rerun-if-changed=src/cpp/graphics_item.cpp");
+    println!("cargo:rerun-if-changed=src/cpp/graphics_scene.cpp");
+    println!("cargo:rerun-if-changed=src/cpp/graphics_view.cpp");
+    println!("cargo:rerun-if-changed=src/cpp/widget_utils.cpp"); // Add our new file
     println!("cargo:rerun-if-changed=build.rs");
 }

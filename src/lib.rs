@@ -1,6 +1,5 @@
 pub mod styles;
-
-
+pub mod widgets;
 use std::ffi::{CStr, CString};
 use std::os::raw::{c_char, c_int, c_void};
 
@@ -186,7 +185,25 @@ unsafe extern "C" {
     // CSS styling functions
     fn set_application_stylesheet(app: *mut RustQApplication, stylesheet: *const c_char);
     fn set_widget_stylesheet(widget: *mut c_void, widget_type: c_int, stylesheet: *const c_char);
+
+    // Add a general widget function to the FFI declarations
+    fn add_widget_to_window(window: *mut RustQWidget, widget: *mut c_void, widget_type: c_int);
 }
+
+// Re-export graphics items
+pub use widgets::graphics_item::{
+    QAbstractGraphicsShapeItem, 
+    QGraphicsRectItem,
+    QGraphicsEllipseItem,
+    QGraphicsLineItem,
+    QGraphicsPathItem,
+    PenStyle,
+    BrushStyle,
+};
+
+// Add new exports for graphics scene and view
+pub use widgets::graphics_scene::QGraphicsScene;
+pub use widgets::graphics_view::QGraphicsView;
 
 // Wrapper structs
 pub struct Application {
@@ -419,6 +436,13 @@ impl Window {
         
         unsafe {
             show_message_box(self.ptr, icon as i32, c_title.as_ptr(), c_text.as_ptr());
+        }
+    }
+
+    pub fn add_graphics_view(&self, view: &QGraphicsView) {
+        unsafe {
+            // We'll use a generic function to add the view as a widget
+            add_widget_to_window(self.ptr, view.as_widget(), 20); // Using widget type 20 for QGraphicsView
         }
     }
 }
